@@ -4,20 +4,34 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
+import { getFirestore } from 'redux-firestore';
 
 class ListScreen extends Component {
+    todoList = this.props.todoList;
     state = {
-        name: '',
-        owner: '',
+        name: this.todoList.name,
+        owner: this.todoList.owner,
     }
-
     handleChange = (e) => {
         const { target } = e;
-
+        const todoList = this.props.todoList;
+        // Name or owner change.
+        const firestore = getFirestore();
+        if (target.id === "name"){
+            todoList.name = target.value;
+            firestore.collection("todoLists").doc(todoList.id).update({
+                name : target.value,
+            });
+        }else{
+            todoList.owner = target.value;
+            firestore.collection("todoLists").doc(todoList.id).update({
+                owner : target.value,
+            });
+        }
         this.setState(state => ({
             ...state,
             [target.id]: target.value,
-        }));
+        }));    
     }
 
     render() {
@@ -35,7 +49,7 @@ class ListScreen extends Component {
                     <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
                 </div>
                 <div className="input-field">
-                    <label htmlFor="password">Owner</label>
+                    <label htmlFor="password">Owner</label> 
                     <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                 </div>
                 <ItemsList todoList={todoList} />

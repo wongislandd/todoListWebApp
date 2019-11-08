@@ -2,10 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { NavLink, Redirect } from 'react-router-dom';
-import { firestoreConnect } from 'react-redux-firebase';
+import { firestoreConnect, firebaseConnect, getFirebase } from 'react-redux-firebase';
 import TodoListLinks from './TodoListLinks'
+import { getFirestore } from 'redux-firestore';
 
 class HomeScreen extends Component {
+    
+    handleNewList = (e) =>{
+        const firestore = getFirestore();
+        var {props} = this;
+        firestore.collection('todoLists').add({
+            items : [],
+            name : "",
+            owner : "Christopher Wong"
+        })
+        console.log(props);
+    }
 
     render() {
         if (!this.props.auth.uid) {
@@ -36,6 +48,7 @@ class HomeScreen extends Component {
         );
     }
 }
+
 
 const mapStateToProps = (state) => {
     return {
