@@ -30,8 +30,7 @@ export default class ItemScreen extends Component {
         this.goBackToListScreen();
     }
     goBackToListScreen(){
-        const {id, todoList} = this.props.match.params;
-        console.log(this.props.history.goBack());
+        this.props.history.goBack();
     }
     render() {
         var todoItem = this.props.location.state.todoItem;
@@ -52,7 +51,7 @@ export default class ItemScreen extends Component {
                 </div>
                 <div id="submitOrCancelDiv">
                     <button className= "submit_button" onClick = {(e)=>this.submitItem()}>Submit</button>
-                    <button className= "cancel_button" onClick = {(e)=>this.props.loadList(this.props.todoList)}>Cancel</button>
+                    <button className= "cancel_button" onClick = {(e)=>this.goBackToListScreen()}>Cancel</button>
                     </div>
             </div>// make these buttons nicer
         )
