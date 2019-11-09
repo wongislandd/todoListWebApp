@@ -6,14 +6,36 @@ import { Link } from 'react-router-dom';
 
 export default class ItemScreen extends Component {
     submitItem(){
+        var newCard = this.props.location.state.newCard;
+        console.log("New Card? " + newCard)
         const firestore = getFirestore();
         const {id,itemid} = this.props.match.params;
         firestore.collection("todoLists").doc(id)
         .get()
         .then(doc => {
             var itemsArr = doc.data().items;
-            this.updateItem(itemsArr, id, itemid);
+            if (!newCard){
+                this.updateItem(itemsArr, id, itemid);
+            }
+            else{
+                this.addNewCard(itemsArr, id, itemid);
+            }
         })
+    }
+    addNewCard(itemsArr,id,itemid){
+        var newItem = {description : document.getElementById("item_description_textfield").value,
+                        assigned_to : document.getElementById("item_assigned_to_textfield").value,
+                        due_date : document.getElementById("item_due_date_textfield").value,
+                        completed : document.getElementById("item_completedSwitch").checked,
+                        key : itemid,
+                        id : itemid,
+                        };
+        itemsArr.push(newItem);
+        const firestore = getFirestore();
+        firestore.collection("todoLists").doc(id).update({
+            items : itemsArr,
+        });
+        this.goBackToListScreen();
     }
     updateItem(itemsArr, id, itemid){
         var itemToUpdate = itemsArr[itemid]; 

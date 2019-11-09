@@ -33,13 +33,17 @@ class ListScreen extends Component {
             [target.id]: target.value,
         }));    
     }
+    moveToTop(){
+        const firestore = getFirestore();
+    }
     render() {
         const auth = this.props.auth;
         const todoList = this.props.todoList;
         if (!auth.uid) {
             return <Redirect to="/" />;
         }
-
+        // When loaded, move this to the top of the home screen list
+        this.moveToTop();
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
