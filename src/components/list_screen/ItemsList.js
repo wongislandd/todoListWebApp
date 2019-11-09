@@ -22,7 +22,7 @@ class ItemsList extends React.Component {
                         <ItemCard todoList={todoList} item={item} />
                     );})
                 }
-                <div><button className="addACardBtn">Add a Card</button></div>
+                <div className="addACardDiv"><button className="addACardBtn">Add a Card</button></div>
             </div>
         );
     }

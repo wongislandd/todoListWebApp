@@ -76,8 +76,8 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   grid-column: 3;
 }
 
-.addACardBtn{
-  position: relative;
+.addACardDiv{
+  align-content: center;
   text-align: center;
 }
 
