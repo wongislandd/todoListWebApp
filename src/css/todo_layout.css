@@ -112,7 +112,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   max-width: 400px;
   align-content: center;
   padding: 30px;
-  row-gap: 3ch;
 }
 #item_description_prompt {}
 #item_description_textfield {
@@ -126,25 +125,26 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 #submitOrCancelDiv{
   display: grid;
 }
-#item_form_submit_button {
-  grid-column: 1/3;
+.submit_button{
+  margin-top: 5%;
 }
-#item_form_cancel_button {
-  grid-column: 3/3;
-}
+.cancel_button{
 
+}
 
 
 /* ITEM SCREEN CLASSES */
 .item_prompt {
-  grid-column: 1 / 4;
+  grid-column: 1;
 }
 .item_input {
-  grid-column: 2 / 4;
+  grid-column: 2;
   margin: auto;
 }
 
 .promptInputDiv{
-  display: flex;
-  justify-content: space-between;
+
+}
+.item_form_container{
+  
 }

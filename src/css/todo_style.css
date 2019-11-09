@@ -92,3 +92,8 @@ div.banner {
 .todo-lists{
   background-color: var(--swatch-foundation);
 }
+
+.item_form_container{
+  background-color: white;
+  padding: 50px;
+}
