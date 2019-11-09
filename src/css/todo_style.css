@@ -38,3 +38,57 @@ div.banner {
 .home_new_list_button:hover {
   box-shadow: 1px 2px;
 }
+
+.card{
+  border: 5px ridge #1C6EA4;
+}
+
+.addACardBtn {
+	box-shadow: 0px 0px 0px 0px #3dc21b;
+	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.addACardBtn:hover {
+	background:linear-gradient(to bottom, #5cbf2a 5%, #44c767 100%);
+	background-color:#5cbf2a;
+}
+.addACardBtn:active {
+	position:relative;
+	top:1px;
+}
+.card-description, .card-assignedTo{
+  font-size: 120%;
+}
+
+.card-due_Date{
+  font-size: 200%;
+}
+.card-completed, .card-not-completed{
+  font-size: 200%;
+}
+
+.card-completed {
+  color: green;
+}
+.card-not-completed {
+  color: red;
+}
+
+.card-headers{
+  background-color: #669966;
+  font-size: 200%;
+}
+
+.todo-lists{
+  background-color: var(--swatch-foundation);
+}

@@ -33,7 +33,6 @@ class ListScreen extends Component {
             [target.id]: target.value,
         }));    
     }
-
     render() {
         const auth = this.props.auth;
         const todoList = this.props.todoList;
@@ -42,7 +41,7 @@ class ListScreen extends Component {
         }
 
         return (
-            <div className="container white">
+            <div className="container">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
                 <div className="input-field">
                     <label htmlFor="email">Name</label>

@@ -48,3 +48,58 @@ input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ec407a !important;
 }
+
+
+.card-content{
+  display: grid;
+  grid-template-columns: 1fr, 2fr, 3fr;
+}
+.card-description{
+  position: relative;
+  font-weight: bold;
+  grid-column: 1;
+}
+
+.card-assignedTo{
+  font-weight: bold;
+  grid-column: 1;
+  grid-row: 2;
+}
+.card-due_Date{
+  position: absolute;
+  left : 40%;
+  grid-column: 2;
+}
+.card-completed, .card-not-completed{
+  position: absolute;
+  left : 70%;
+  grid-column: 3;
+}
+
+.addACardBtn{
+  position: relative;
+  text-align: center;
+}
+
+.card-headers{
+  display: grid;
+  height: 50px;
+  grid-row-gap: 0px;
+  grid-column-gap: 50px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.description-header{
+  position: relative;
+  left : 50%;
+}
+.due_date-header{
+  position: relative;
+  left : 30%;
+}
+.status-header{
+  grid-column: 3;
+}
