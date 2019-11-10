@@ -7,6 +7,9 @@ import { firestoreConnect, getFirebase } from 'react-redux-firebase';
 import { getFirestore } from 'redux-firestore';
 
 class ItemsList extends React.Component {
+    state = {
+        sortedBy : "nothing"
+    }
     // Refreshes keys and updates the firestore
     refreshKeys(todoList){
         const items = todoList.items;
@@ -45,6 +48,109 @@ class ItemsList extends React.Component {
         todoList.items.splice(id,1);
         this.refreshKeys(todoList);
     }
+
+    sortByTask(){
+        const todoList = this.props.todoList;
+        var items = todoList.items;
+        // If it's not currently sorted by ascending task
+        if (!(this.state.sortedBy === "sortByTaskAsc")){
+            items.sort(function(item1,item2){
+                if (item1.description > item2.description){
+                    return 1;
+                }
+                else if(item1.description < item2.description){
+                    return -1;
+                }
+                else return 0;
+            });
+            this.setState({
+                sortedBy : "sortByTaskAsc"
+            })
+        }
+        if(this.state.sortedBy === "sortByTaskAsc"){
+            items.sort(function(item1,item2){
+                if (item1.description > item2.description){
+                    return -1;
+                }
+                else if(item1.description < item2.description){
+                    return 1;
+                }
+                else return 0;
+            });
+            this.setState({
+                sortedBy : "sortByTaskDesc"
+            })   
+        }
+        this.refreshKeys(todoList);
+    }
+    sortByDueDate(){
+        const todoList = this.props.todoList;
+        var items = todoList.items;
+        // If it's not currently sorted by ascending task
+        if (!(this.state.sortedBy === "sortByDueDateAsc")){
+            items.sort(function(item1,item2){
+                if (item1.due_date > item2.due_date){
+                    return 1;
+                }
+                else if(item1.due_date < item2.due_date){
+                    return -1;
+                }
+                else return 0;
+            });
+            this.setState({
+                sortedBy : "sortByDueDateAsc"
+            })
+        }
+        if(this.state.sortedBy === "sortByDueDateAsc"){
+            items.sort(function(item1,item2){
+                if (item1.due_date > item2.due_date){
+                    return -1;
+                }
+                else if(item1.due_date < item2.due_date){
+                    return 1;
+                }
+                else return 0;
+            });
+            this.setState({
+                sortedBy : "sortByDueDateDesc"
+            })   
+        }
+        this.refreshKeys(todoList);
+    }
+    sortByStatus(){
+        const todoList = this.props.todoList;
+        var items = todoList.items;
+        // If it's not currently sorted by ascending task
+        if (!(this.state.sortedBy === "sortByStatusAsc")){
+            items.sort(function(item1,item2){
+                if (item1.completed < item2.completed){
+                    return 1;
+                }
+                else if(item1.completed > item2.completed){
+                    return -1;
+                }
+                else return 0;
+            });
+            this.setState({
+                sortedBy : "sortByStatusAsc"
+            })
+        }
+        if(this.state.sortedBy === "sortByStatusAsc"){
+            items.sort(function(item1,item2){
+                if (item1.completed < item2.completed){
+                    return -1;
+                }
+                else if(item1.completed > item2.completed){
+                    return 1;
+                }
+                else return 0;
+            });
+            this.setState({
+                sortedBy : "sortByStatusDesc"
+            })   
+        }
+        this.refreshKeys(todoList);
+    }
     render() {
         console.log("ItemList render called");
         var todoList = this.props.todoList;
@@ -58,9 +164,9 @@ class ItemsList extends React.Component {
         return (
             <div className="todo-lists section">
                 <div className="card-headers">
-                    <div className ="description-header">Task</div>
-                    <div className = "due_date-header">Due Date</div>
-                    <div className ="status-header">Status</div>
+                    <div className ="description-header" onClick = {(e)=>this.sortByTask()}>Task</div>
+                    <div className = "due_date-header"  onClick = {(e)=>this.sortByDueDate()}>Due Date</div>
+                    <div className ="status-header"  onClick = {(e)=>this.sortByStatus()}>Status</div>
                 </div>
                 {items && items.map(function(item) {
                     item.id = item.key;
