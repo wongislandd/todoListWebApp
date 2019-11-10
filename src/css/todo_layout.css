@@ -199,6 +199,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   animation: slide 0.5s forwards;
 }
 
+.listHeader{
+  
+}
+.deleteListBtn{
+  float: right;
+}
+
 /* Animation for buttons */
 @-webkit-keyframes slide {
   100% { left: 0; }

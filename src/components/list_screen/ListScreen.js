@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
 import { getFirestore } from 'redux-firestore';
+import {Button, Modal} from 'react-materialize'
 
 class ListScreen extends Component {
     constructor(props){
@@ -15,6 +16,7 @@ class ListScreen extends Component {
     state = {
         name: this.todoList.name,
         owner: this.todoList.owner,
+        redirect: false,
     }
     handleChange = (e) => {
         const { target } = e;
@@ -37,31 +39,14 @@ class ListScreen extends Component {
             [target.id]: target.value,
         }));    
     }
-    /* Causes constant switching, won't work
-    moveToTop(){
-        const firestore = getFirestore();
-        firestore.collection("todoLists").limit(1).get()
-        .then(snapshot => {
-            // It'll only be the first one
-            snapshot.forEach(doc => {
-                this.switchWithTop(doc.id, doc.data());
-              });
-        });
-    }
-    switchWithTop(topID, topsContents){
+    handleDeleteList(){
         const firestore = getFirestore();
         var todoList = this.props.todoList;
-        firestore.collection("todoLists").doc(topID).set({
-            name : todoList.name,
-            owner : todoList.owner,
-            items: todoList.items
+        this.setState({
+            redirect : true,
         })
-        firestore.collection("todoLists").doc(todoList.id).set({
-            name : topsContents.name,
-            owner : topsContents.owner,
-            items: topsContents.items,
-        })
-    }*/
+        firestore.collection("todoLists").doc(todoList.id).delete();
+    }
     markAsMostRecent(){
         const firestore = getFirestore();
         var todoList = this.props.todoList;
@@ -77,10 +62,23 @@ class ListScreen extends Component {
         if (!auth.uid) {
             return <Redirect to="/" />;
         }
+        if (this.state.redirect){
+            return <Redirect to='/' />
+        }
         // When loaded, move this to the top of the home screen list
         return (
             <div className="container">
-                <h5 className="grey-text text-darken-3">Todo List</h5>
+                <div className = "list_header">
+                <Modal id = "deleteModal" header="Delete List" trigger={
+                    <Button className ="deleteListBtn" waves="dark" style={{marginRight: '5px'}}>
+                        DELETE LIST
+                    </Button>
+                }
+                    actions = {[<Button className = "modal-close" flat> Close </Button>, <Button flat onClick = {(e)=>this.handleDeleteList()}>Confirm</Button>]}> 
+                    <p>Are you sure you want to delete {todoList.name}? </p>
+                    <p><b>This action is irreversible.</b></p>
+                 </Modal>
+            </div>
                 <div className="input-field">Name
                     <label htmlFor="email"></label>
                     <input className="active" type="text" name="name" id="name" onChange={this.handleChange} value={todoList.name} />
