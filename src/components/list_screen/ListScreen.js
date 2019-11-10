@@ -7,6 +7,10 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { getFirestore } from 'redux-firestore';
 
 class ListScreen extends Component {
+    constructor(props){
+        super(props);
+        this.markAsMostRecent();
+    }
     todoList = this.props.todoList;
     state = {
         name: this.todoList.name,
@@ -70,7 +74,6 @@ class ListScreen extends Component {
     render() {
         const auth = this.props.auth;
         const todoList = this.props.todoList;
-        this.markAsMostRecent();
         if (!auth.uid) {
             return <Redirect to="/" />;
         }
