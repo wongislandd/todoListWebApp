@@ -97,3 +97,10 @@ div.banner {
   background-color: white;
   padding: 50px;
 }
+.cancel_button,.cancel_button:hover{
+  background-color: #dc235d;
+}
+.cancel_button:hover{
+  box-shadow: 0 0 15px #d35400;
+  text-shadow: 0 0 15px #d35400;
+}

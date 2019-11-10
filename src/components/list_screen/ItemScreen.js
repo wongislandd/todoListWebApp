@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getFirestore } from 'redux-firestore';
-import {Switch} from 'react-materialize';
+import {Switch, Button} from 'react-materialize';
 import TodoListCard from '../home_screen/TodoListCard';
 import { Link } from 'react-router-dom';
 
@@ -72,8 +72,8 @@ export default class ItemScreen extends Component {
                     <Switch offLabel="Pending" onLabel="Complete" id = "item_completedSwitch" defaultChecked = {newCard ? false : todoItem.completed}/> 
                 </div>
                 <div id="submitOrCancelDiv">
-                    <button className= "submit_button" onClick = {(e)=>this.submitItem()}>Submit</button>
-                    <button className= "cancel_button" onClick = {(e)=>this.goBackToListScreen()}>Cancel</button>
+                    <Button className= "submit_button" type = "submit" waves = "light" onClick = {(e)=>this.submitItem()}>Submit</Button>
+                    <Button className= "cancel_button" type = "cancel" waves = "light" onClick = {(e)=>this.goBackToListScreen()}>Cancel</Button>
                     </div>
             </div>// make these buttons nicer
         )

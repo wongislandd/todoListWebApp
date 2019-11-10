@@ -148,3 +148,68 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 .item_form_container{
   
 }
+
+.itemCard{
+  position: relative;
+}
+
+.moveUpHoverBtn, .moveDownHoverBtn, .deleteHoverBtn{
+  display: none;
+}
+/* Show on hover
+.itemCard:hover .moveUpHoverBtn{
+  display: block;
+}
+.itemCard:hover .moveDownHoverBtn{
+  display: block;
+}
+.itemCard:hover .deleteHoverBtn{
+  display: block;
+}
+*/
+.moveUpHoverBtn{
+    transition: 1s;
+    position: absolute;
+    left: 0; /*-25% */ 
+    top: 32%;
+    background-color: #1222ed;  
+    -webkit-animation: slide 0.5s backwards;
+    -webkit-animation-delay: 2s;
+    animation: slide3 0.5s forwards;
+}
+.moveDownHoverBtn{
+  transition: 1s;
+  position: absolute;
+  left: 0;  /* -17.5 */
+  top: 32%;
+  background-color: #8410ef;  
+  -webkit-animation: slide 0.5s backwards;
+  -webkit-animation-delay: 2s;
+  animation: slide2 0.5s forwards;
+}
+.deleteHoverBtn{
+  transition: 1s;
+  position: absolute;
+  left: 0; 
+  color: black;
+  top: 32%;
+  background-color: #d35400;  
+  -webkit-animation: slide 0.5s backwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s forwards;
+}
+
+/* Animation for buttons */
+@-webkit-keyframes slide {
+  100% { left: 0; }
+}
+
+@keyframes slide {
+  100% { left: -10%; }
+}
+@keyframes slide2 {
+  100% { left: -17.5%; }
+}
+@keyframes slide3 {
+  100% { left: -25%; }
+}

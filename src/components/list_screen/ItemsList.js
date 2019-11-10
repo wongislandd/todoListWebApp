@@ -3,13 +3,57 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemCard from './ItemCard';
 import { Link } from 'react-router-dom';
-import { firestoreConnect } from 'react-redux-firebase';
+import { firestoreConnect, getFirebase } from 'react-redux-firebase';
+import { getFirestore } from 'redux-firestore';
 
 class ItemsList extends React.Component {
-    render() {
-        const todoList = this.props.todoList;
+    // Refreshes keys and updates the firestore
+    refreshKeys(todoList){
         const items = todoList.items;
-        const newItemID = todoList.items.length;
+        for (var i=0;i<items.length;i++){
+            items[i].key = i;
+        }
+        var firestore = getFirestore();
+        firestore.collection("todoLists").doc(todoList.id).update({
+            items : items
+        });
+
+    }
+    moveUp(id, todoList){
+        if (id == 0){
+            console.log("Cannot move up the first element");
+            return;
+        }
+        var items = todoList.items;
+        var placeholder = items[id-1];
+        items[id-1] = items[id];
+        items[id] = placeholder;
+        this.refreshKeys(todoList);
+    }
+    moveDown(id, todoList){
+        var items = todoList.items;
+        if (id == items.length-1){
+            console.log("Cannot move down the last element");
+            return;
+        }
+        var placeholder = items[id+1];
+        items[id+1] = items[id];
+        items[id] = placeholder;
+        this.refreshKeys(todoList);
+    }
+    deleteItem(id, todoList){
+        todoList.items.splice(id,1);
+        this.refreshKeys(todoList);
+    }
+    render() {
+        console.log("ItemList render called");
+        var todoList = this.props.todoList;
+        var refreshKeys = this.refreshKeys;
+        var moveUp = this.moveUp;
+        var moveDown = this.moveDown;
+        var deleteItem = this.deleteItem;
+        var items = todoList.items;
+        var newItemID = todoList.items.length;
         console.log(newItemID);
         console.log("ItemsList: todoList.id " + todoList.id);
         return (
@@ -22,7 +66,8 @@ class ItemsList extends React.Component {
                 {items && items.map(function(item) {
                     item.id = item.key;
                     return (
-                        <ItemCard todoList={todoList} item={item} new ={false}/>
+                        <ItemCard todoList={todoList} item={item} new ={false} refreshKeys = {refreshKeys} 
+                        moveUp = {moveUp} moveDown = {moveDown} deleteItem = {deleteItem}/>
                     );})
                 }
                 <Link to={{
