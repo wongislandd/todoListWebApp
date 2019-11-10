@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { getFirestore } from 'redux-firestore';
 import {Switch, Button} from 'react-materialize';
-import TodoListCard from '../home_screen/TodoListCard';
-import { Link } from 'react-router-dom';
 
 export default class ItemScreen extends Component {
     submitItem(){

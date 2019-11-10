@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ItemCard from './ItemCard';
 import { Link } from 'react-router-dom';
-import { firestoreConnect, getFirebase } from 'react-redux-firebase';
+import { firestoreConnect} from 'react-redux-firebase';
 import { getFirestore } from 'redux-firestore';
 
 class ItemsList extends React.Component {
@@ -23,7 +23,7 @@ class ItemsList extends React.Component {
 
     }
     moveUp(id, todoList){
-        if (id == 0){
+        if (id === 0){
             console.log("Cannot move up the first element");
             return;
         }
@@ -35,7 +35,7 @@ class ItemsList extends React.Component {
     }
     moveDown(id, todoList){
         var items = todoList.items;
-        if (id == items.length-1){
+        if (id === items.length-1){
             console.log("Cannot move down the last element");
             return;
         }

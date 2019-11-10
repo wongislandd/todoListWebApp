@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { NavLink, Redirect, Route } from 'react-router-dom';
-import { firestoreConnect, firebaseConnect, getFirebase } from 'react-redux-firebase';
+import { Redirect} from 'react-router-dom';
+import { firestoreConnect, getFirebase } from 'react-redux-firebase';
 import TodoListLinks from './TodoListLinks'
 import { getFirestore } from 'redux-firestore';
-import TodoListCard from './TodoListCard';
 
 
 class HomeScreen extends Component {

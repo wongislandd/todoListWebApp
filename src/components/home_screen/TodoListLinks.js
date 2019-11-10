@@ -28,7 +28,7 @@ class TodoListLinks extends React.Component {
     }
     render() {
         const todoLists = this.props.todoLists;
-        if (todoLists != undefined){
+        if (todoLists !== undefined){
             this.reorderByAccessDate(todoLists);
         }
         return (

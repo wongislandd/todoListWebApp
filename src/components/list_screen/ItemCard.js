@@ -11,16 +11,15 @@ class ItemCard extends React.Component {
         var myMoveDownHoverBtn = document.getElementsByClassName("moveDownHoverBtn")[item.id];
         var myDeleteHoverBtn = document.getElementsByClassName("deleteHoverBtn")[item.id];
         // Only change if it is not disabled. Don't even show the disabled ones.
-        if(myMoveUpHoverBtn.disabled == false){
+        if(myMoveUpHoverBtn.disabled === false){
             myMoveUpHoverBtn.style.display = "block";
         }
-        if(myMoveDownHoverBtn.disabled == false){
+        if(myMoveDownHoverBtn.disabled === false){
             myMoveDownHoverBtn.style.display = "block";
         }
         myDeleteHoverBtn.style.display = "block";
     }
-    hideAllOtherButtons(){
-        const { item } = this.props;  
+    hideAllOtherButtons(){ 
         var MoveUpHoverBtns = document.getElementsByClassName("moveUpHoverBtn");
         var MoveDownHoverBtns = document.getElementsByClassName("moveDownHoverBtn");
         var DeleteHoverBtns = document.getElementsByClassName("deleteHoverBtn");
