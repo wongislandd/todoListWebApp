@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, Route } from 'react-router-dom';
 import { firestoreConnect, firebaseConnect, getFirebase } from 'react-redux-firebase';
 import TodoListLinks from './TodoListLinks'
 import { getFirestore } from 'redux-firestore';
+import TodoListCard from './TodoListCard';
+
 
 class HomeScreen extends Component {
     
     handleNewList = (e) =>{
         const firestore = getFirestore();
+        const firebase = getFirebase();
+        var userID= firebase.auth().currentUser.uid;
+        firestore.collection('users').doc(userID).get()
+        .then(doc => 
+            this.createNewList(doc.data())
+        );
+    }
+    // Creates a new list under the name of the user.
+    // God damn had to go the distance just to get the first name and last name.
+    createNewList(userData){
+        const firestore = getFirestore();
         var {props} = this;
         firestore.collection('todoLists').add({
             items : [],
             name : "",
-            owner : "Christopher Wong"
-        })
-        console.log(props);
+            owner : userData.firstName + " " + userData.lastName,
+        }).then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+            props.history.push("todoList/" + docRef.id);
+        });
     }
 
     render() {

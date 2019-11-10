@@ -54,7 +54,6 @@ class ItemsList extends React.Component {
         var deleteItem = this.deleteItem;
         var items = todoList.items;
         var newItemID = todoList.items.length;
-        console.log(newItemID);
         console.log("ItemsList: todoList.id " + todoList.id);
         return (
             <div className="todo-lists section">
