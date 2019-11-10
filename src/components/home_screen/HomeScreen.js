@@ -33,7 +33,9 @@ class HomeScreen extends Component {
             props.history.push("todoList/" + docRef.id);
         });
     }
-
+    addNotFirstAttribute(){
+        
+    }
     render() {
         if (!this.props.auth.uid) {
             console.log("You aren't logged in!");

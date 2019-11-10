@@ -33,17 +33,48 @@ class ListScreen extends Component {
             [target.id]: target.value,
         }));    
     }
+    /* Causes constant switching, won't work
     moveToTop(){
         const firestore = getFirestore();
+        firestore.collection("todoLists").limit(1).get()
+        .then(snapshot => {
+            // It'll only be the first one
+            snapshot.forEach(doc => {
+                this.switchWithTop(doc.id, doc.data());
+              });
+        });
+    }
+    switchWithTop(topID, topsContents){
+        const firestore = getFirestore();
+        var todoList = this.props.todoList;
+        firestore.collection("todoLists").doc(topID).set({
+            name : todoList.name,
+            owner : todoList.owner,
+            items: todoList.items
+        })
+        firestore.collection("todoLists").doc(todoList.id).set({
+            name : topsContents.name,
+            owner : topsContents.owner,
+            items: topsContents.items,
+        })
+    }*/
+    markAsMostRecent(){
+        const firestore = getFirestore();
+        var todoList = this.props.todoList;
+        firestore.collection("todoLists").doc(todoList.id).update({
+            lastAccessed : new Date().toISOString()
+        })
+        // Sorted it by most recent, but how do I load it by most recent?
+        firestore.collection("todoLists").orderBy('lastAccessed');
     }
     render() {
         const auth = this.props.auth;
         const todoList = this.props.todoList;
+        this.markAsMostRecent();
         if (!auth.uid) {
             return <Redirect to="/" />;
         }
         // When loaded, move this to the top of the home screen list
-        this.moveToTop();
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
