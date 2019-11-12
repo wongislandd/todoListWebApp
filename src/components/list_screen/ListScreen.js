@@ -34,10 +34,6 @@ class ListScreen extends Component {
                 owner : target.value,
             });
         }
-        this.setState(state => ({
-            ...state,
-            [target.id]: target.value,
-        }));    
     }
     handleDeleteList(){
         const firestore = getFirestore();
