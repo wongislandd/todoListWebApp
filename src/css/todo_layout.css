@@ -156,17 +156,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 .moveUpHoverBtn, .moveDownHoverBtn, .deleteHoverBtn{
   display: none;
 }
-/* Show on hover
-.itemCard:hover .moveUpHoverBtn{
-  display: block;
-}
-.itemCard:hover .moveDownHoverBtn{
-  display: block;
-}
-.itemCard:hover .deleteHoverBtn{
-  display: block;
-}
-*/
 .moveUpHoverBtn{
     transition: 1s;
     position: absolute;
